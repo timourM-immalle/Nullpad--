@@ -1,0 +1,26 @@
+﻿<Window x:Class="Nullpad__.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nullpad__"
+        mc:Ignorable="d"
+        Title="Nullpad--" Height="350" Width="525">
+    <DockPanel>
+        <Menu x:Name="menu" DockPanel.Dock="Top">
+            <MenuItem Header="_Bestand">
+                <MenuItem x:Name="itemOpenen" Header="_Open" Click="itemOpenen_Click"/>
+                <MenuItem x:Name="itemOpslaan" Header="_Opslaan" Click="itemOpslaan_Click"/>
+                <Separator/>
+                <MenuItem x:Name="itemSluiten" Header="_Sluiten" Click="itemSluiten_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Over"/>
+            </MenuItem>
+        </Menu>
+        <Grid DockPanel.Dock="Bottom">
+            <TextBox x:Name="txtHoofdtekst" Margin="50,21,49,31"/>
+            <!--inhoud-->
+        </Grid>
+    </DockPanel>
+</Window>

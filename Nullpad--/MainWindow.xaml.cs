@@ -53,7 +53,6 @@ namespace Nullpad__
                 ////inputStream = File.OpenText(huidigeFile);
                 ////txtHoofdtekst.Text = inputStream.ReadToEnd();
                 ////inputStream.Close();
-
                 txtHoofdtekst.Text = File.ReadAllText(huidigeFile);
             }
         }
@@ -75,7 +74,6 @@ namespace Nullpad__
             //StreamWriter outputStream = File.CreateText(huidigeFile);
             //outputStream.Write(txtHoofdtekst.Text);
             //outputStream.Close();
-
             File.WriteAllText(huidigeFile, txtHoofdtekst.Text);
         }
 

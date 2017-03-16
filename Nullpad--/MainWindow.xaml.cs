@@ -54,7 +54,7 @@ namespace Nullpad__
                 ////txtHoofdtekst.Text = inputStream.ReadToEnd();
                 ////inputStream.Close();
 
-                txtHoofdtekst.Text = File.OpenText(huidigeFile).ReadToEnd();
+                txtHoofdtekst.Text = File.ReadAllText(huidigeFile);
             }
         }
 
@@ -76,7 +76,7 @@ namespace Nullpad__
             //outputStream.Write(txtHoofdtekst.Text);
             //outputStream.Close();
 
-            File.CreateText(huidigeFile);
+            File.WriteAllText(huidigeFile, txtHoofdtekst.Text);
         }
 
         private void itemSluiten_Click(object sender, RoutedEventArgs e)

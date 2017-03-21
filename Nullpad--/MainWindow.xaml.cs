@@ -103,47 +103,60 @@ namespace Nullpad__
             Environment.Exit(0);
         }
 
-        private void itemParsen_Click(object sender, RoutedEventArgs e)
+        private void Parse_Click(object sender, RoutedEventArgs e)
         {
             List<Persoon> parsedPersonen = new List<Persoon>();
-            string[] filedata = txtFileContents.Text.Split('\n');
 
+            string[] filedata = txtFileContents.Text.Split('\n');
             try
             {
-                foreach (String rij in filedata)
+                foreach (var row in filedata)
                 {
-                    MessageBox.Show("[" + rij.Trim() + "]");
+                    // MessageBox.Show(String.Format("[{0}]", row.Trim()));
 
-                    if (rij != "")
+                    // is row valid?
+                    string[] fields = row.Trim().Split(';');
+
+                    if (fields.Length != 3)
                     {
-                        string[] velden = rij.Split(';');
-
-                        Persoon p = new Persoon();
-                        p.Voornaam = velden[0];
-                        p.Achternaam = velden[1];
-                        p.Geboortedatum = DateTime.Parse(velden[2]);
+                        MessageBox.Show(
+                            String.Format("Couldn't parse [{0}]. Number of fields: {1}.",
+                                row.Trim(),
+                                fields.Length)
+                        );
+                    }
+                    else if (row.Trim() == "")
+                    {
+                        // ignore empty rows
+                    }
+                    else
+                    {
+                        var p = new Persoon();
+                        p.Voornaam = fields[0];
+                        p.Achternaam = fields[1];
+                        p.Geboortedatum = DateTime.Parse(fields[2]);
                         parsedPersonen.Add(p);
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exc)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(exc.ToString());
             }
 
             parsedDataGrid.ItemsSource = parsedPersonen;
         }
-
-        private void itemPersonenlijst_Click(object sender, RoutedEventArgs e)
-        {
-            string personenString = "";
-
-            foreach (Persoon p in personen)
-            {
-                personenString += p.ToString() + Environment.NewLine;
-            }
-
-            MessageBox.Show(personenString);
-        }
     }
+
+    //private void itemPersonenlijst_Click(object sender, RoutedEventArgs e)
+    //{
+    //    string personenString = "";
+
+    //    foreach (Persoon p in personen)
+    //    {
+    //        personenString += p.ToString() + Environment.NewLine;
+    //    }
+
+    //    MessageBox.Show(personenString);
+    //}
 }

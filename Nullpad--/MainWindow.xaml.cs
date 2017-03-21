@@ -105,14 +105,35 @@ namespace Nullpad__
 
         private void itemParsen_Click(object sender, RoutedEventArgs e)
         {
+            List<Persoon> parsedPersonen = new List<Persoon>();
+            string[] filedata = txtFileContents.Text.Split('\n');
 
+            try
+            {
+                foreach (String row in filedata)
+                {
+                    string[] fields = row.Split(';');
+                    var p = new Persoon();
+                    p.Voornaam = fields[0];
+                    p.Achternaam = fields[1];
+                    p.Geboortedatum = DateTime.Parse(fields[2]);
+                    parsedPersonen.Add(p);
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
+            }
+
+
+            parsedDataGrid.ItemsSource = parsedPersonen;
         }
 
         private void itemPersonenlijst_Click(object sender, RoutedEventArgs e)
         {
             string personenString = "";
 
-            foreach (var p in personen)
+            foreach (Persoon p in personen)
             {
                 personenString += p.ToString() + Environment.NewLine;
             }

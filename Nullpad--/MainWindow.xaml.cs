@@ -110,21 +110,26 @@ namespace Nullpad__
 
             try
             {
-                foreach (String row in filedata)
+                foreach (String rij in filedata)
                 {
-                    string[] fields = row.Split(';');
-                    var p = new Persoon();
-                    p.Voornaam = fields[0];
-                    p.Achternaam = fields[1];
-                    p.Geboortedatum = DateTime.Parse(fields[2]);
-                    parsedPersonen.Add(p);
+                    MessageBox.Show("[" + rij.Trim() + "]");
+
+                    if (rij != "")
+                    {
+                        string[] velden = rij.Split(';');
+
+                        Persoon p = new Persoon();
+                        p.Voornaam = velden[0];
+                        p.Achternaam = velden[1];
+                        p.Geboortedatum = DateTime.Parse(velden[2]);
+                        parsedPersonen.Add(p);
+                    }
                 }
             }
-            catch (Exception exc)
+            catch (Exception ex)
             {
-                MessageBox.Show(exc.ToString());
+                MessageBox.Show(ex.ToString());
             }
-
 
             parsedDataGrid.ItemsSource = parsedPersonen;
         }

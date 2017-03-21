@@ -25,6 +25,7 @@ namespace Nullpad__
         private string huidigeFile = "";
         private string basisDir;
         private DateTime geboorteDatum = new DateTime(1990, 1, 2);
+        List<Persoon> personen = new List<Persoon>();
 
         public MainWindow()
         {
@@ -32,11 +33,9 @@ namespace Nullpad__
 
             basisDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            List<Personen> personen = new List<Personen>();
-
-            personen.Add(new Personen { Voornaam = "Willy", Achternaam = "Janssens", Geboortedatum = new DateTime(1990, 1, 2) });
-            personen.Add(new Personen { Voornaam = "Ed", Achternaam = "Sheeran", Geboortedatum = new DateTime(2000, 12, 26) });
-            personen.Add(new Personen { Voornaam = "Hans", Achternaam = "Van Broeckhoven", Geboortedatum = new DateTime(1981, 10, 12) });
+            personen.Add(new Persoon { Voornaam = "Willy", Achternaam = "Janssens", Geboortedatum = new DateTime(1990, 1, 2) });
+            personen.Add(new Persoon { Voornaam = "Ed", Achternaam = "Sheeran", Geboortedatum = new DateTime(2000, 12, 26) });
+            personen.Add(new Persoon { Voornaam = "Hans", Achternaam = "Van Broeckhoven", Geboortedatum = new DateTime(1981, 10, 12) });
 
             parsedDataGrid.ItemsSource = personen;
         }
@@ -102,6 +101,23 @@ namespace Nullpad__
         private void itemSluiten_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void itemParsen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void itemPersonenlijst_Click(object sender, RoutedEventArgs e)
+        {
+            string personenString = "";
+
+            foreach (var p in personen)
+            {
+                personenString += p.ToString() + Environment.NewLine;
+            }
+
+            MessageBox.Show(personenString);
         }
     }
 }

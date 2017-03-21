@@ -24,12 +24,21 @@ namespace Nullpad__
     {
         private string huidigeFile = "";
         private string basisDir;
+        private DateTime geboorteDatum = new DateTime(1990, 1, 2);
 
         public MainWindow()
         {
             InitializeComponent();
 
             basisDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            List<Personen> personen = new List<Personen>();
+
+            personen.Add(new Personen { Voornaam = "Willy", Achternaam = "Janssens", Geboortedatum = new DateTime(1990, 1, 2) });
+            personen.Add(new Personen { Voornaam = "Ed", Achternaam = "Sheeran", Geboortedatum = new DateTime(2000, 12, 26) });
+            personen.Add(new Personen { Voornaam = "Hans", Achternaam = "Van Broeckhoven", Geboortedatum = new DateTime(1981, 10, 12) });
+
+            parsedDataGrid.ItemsSource = personen;
         }
 
         private void itemOpenen_Click(object sender, RoutedEventArgs e)
@@ -53,7 +62,7 @@ namespace Nullpad__
                 ////inputStream = File.OpenText(huidigeFile);
                 ////txtHoofdtekst.Text = inputStream.ReadToEnd();
                 ////inputStream.Close();
-                txtHoofdtekst.Text = File.ReadAllText(huidigeFile);
+                txtFileContents.Text = File.ReadAllText(huidigeFile);
             }
         }
 
@@ -74,12 +83,25 @@ namespace Nullpad__
             //StreamWriter outputStream = File.CreateText(huidigeFile);
             //outputStream.Write(txtHoofdtekst.Text);
             //outputStream.Close();
-            File.WriteAllText(huidigeFile, txtHoofdtekst.Text);
+            File.WriteAllText(huidigeFile, txtFileContents.Text);
+        }
+
+        private void itemOpslaanAls_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog opTeSlaan = new SaveFileDialog();
+
+            opTeSlaan.InitialDirectory = basisDir;
+
+            if (opTeSlaan.ShowDialog().Value)
+            {
+                huidigeFile = opTeSlaan.FileName;
+                File.WriteAllText(huidigeFile, txtFileContents.Text);
+            }
         }
 
         private void itemSluiten_Click(object sender, RoutedEventArgs e)
         {
-
+            Environment.Exit(0);
         }
     }
 }

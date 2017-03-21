@@ -11,16 +11,37 @@
             <MenuItem Header="_Bestand">
                 <MenuItem x:Name="itemOpenen" Header="_Open" Click="itemOpenen_Click"/>
                 <MenuItem x:Name="itemOpslaan" Header="_Opslaan" Click="itemOpslaan_Click"/>
+                <MenuItem x:Name="itemOpslaanAls" Header="_Opslaan als" Click="itemOpslaanAls_Click"/>
                 <Separator/>
                 <MenuItem x:Name="itemSluiten" Header="_Sluiten" Click="itemSluiten_Click"/>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="_Over"/>
             </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem x:Name="itemParsen" Header="_Parsen"/>
+            </MenuItem>
         </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <!--(deze) StatusBar boven Grid, anders wordt Grid eerder onderaan geplaatst-->
+            <TextBlock>Status</TextBlock>
+        </StatusBar>
         <Grid DockPanel.Dock="Bottom">
-            <TextBox x:Name="txtHoofdtekst" Margin="50,21,49,31"/>
+            <!--<TextBox x:Name="txtHoofdtekst" Margin="168,117,49,31"/>-->
             <!--inhoud-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="8*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtFileContents" Grid.Column="0" Grid.ColumnSpan="2" AcceptsReturn="True"/>
+            <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Right" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext" Background="LightGray"/>
+            <!--<ListView x:Name="personenLijsten" Grid.Column="3">
+                <DataGrid x:Name="parsedDataGrid">
+                </DataGrid>
+            </ListView>-->
+            <DataGrid x:Name="parsedDataGrid" Grid.Column="3"/>
         </Grid>
     </DockPanel>
 </Window>

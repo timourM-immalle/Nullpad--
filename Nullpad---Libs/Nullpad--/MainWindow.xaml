@@ -1,0 +1,49 @@
+﻿<Window x:Class="Nullpad__.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nullpad__"
+        mc:Ignorable="d"
+        Title="Nullpad--" Height="350" Width="525">
+    <DockPanel>
+        <Menu x:Name="menu" DockPanel.Dock="Top">
+            <MenuItem Header="_Bestand">
+                <MenuItem x:Name="itemOpenen" Header="_Open" Click="itemOpenen_Click"/>
+                <MenuItem x:Name="itemOpslaan" Header="_Opslaan" Click="itemOpslaan_Click"/>
+                <MenuItem x:Name="itemOpslaanAls" Header="_Opslaan als" Click="itemOpslaanAls_Click"/>
+                <Separator/>
+                <MenuItem x:Name="itemSluiten" Header="_Sluiten" Click="itemSluiten_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Over"/>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem x:Name="itemParsen" Header="_Parsen" Click="itemParsen_Click"/>
+                <MenuItem x:Name="itemPersonenlijst" Header="_Personen" Click="itemPersonenlijst_Click"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <!--(deze) StatusBar boven Grid, anders wordt Grid eerder onderaan geplaatst-->
+            <TextBlock>Status</TextBlock>
+        </StatusBar>
+        <Grid DockPanel.Dock="Bottom">
+            <!--<TextBox x:Name="txtHoofdtekst" Margin="168,117,49,31"/>-->
+            <!--inhoud-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="16*"/>
+                <ColumnDefinition Width="39*"/>
+                <ColumnDefinition Width="73*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="128*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtFileContents" Grid.Column="0" Grid.ColumnSpan="3" AcceptsReturn="True"/>
+            <GridSplitter Grid.Column="3" Width="5" HorizontalAlignment="Right" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext" Background="LightGray"/>
+            <!--<ListView x:Name="personenLijsten" Grid.Column="3">
+                <DataGrid x:Name="parsedDataGrid">
+                </DataGrid>
+            </ListView>-->
+            <DataGrid x:Name="parsedDataGrid" Grid.Column="4"/>
+        </Grid>
+    </DockPanel>
+</Window>
